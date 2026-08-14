@@ -9,27 +9,16 @@ import Presentacion.ServidorHTTP;
 import Presentacion.ServidorTCP;
 import Repositorio.RepositorioDistritos;
 import Repositorio.RepositorioPadron;
+import utilidades.configuracion;
 
 /**
  *
  * @author jerso
  */
 
-
 public class App {
 
     public static void main(String[] args) {
-
-        // =========================================
-        // RUTAS DE LOS ARCHIVOS
-        // =========================================
-
-         String archivoPadron =
-                "C:\\Users\\jerso\\Downloads\\padron_completo\\PADRON_COMPLETO.txt";
-
-        String archivoDistritos =
-                "C:\\Users\\jerso\\Downloads\\padron_completo\\distelec.txt";
-
 
         // =========================================
         // REPOSITORIOS
@@ -37,12 +26,12 @@ public class App {
 
         RepositorioPadron repoPadron =
                 new RepositorioPadron(
-                        archivoPadron
+                        configuracion.ARCHIVO_PADRON
                 );
 
         RepositorioDistritos repoDistritos =
                 new RepositorioDistritos(
-                        archivoDistritos
+                        configuracion.ARCHIVO_DISTRITOS
                 );
 
 
@@ -58,23 +47,23 @@ public class App {
 
 
         // =========================================
-        // SERVIDOR TCP - PUERTO 5000
+        // SERVIDOR TCP
         // =========================================
 
         ServidorTCP servidorTCP =
                 new ServidorTCP(
-                        5000,
+                        configuracion.PUERTO_TCP,
                         servicio
                 );
 
 
         // =========================================
-        // SERVIDOR HTTP - PUERTO 8080
+        // SERVIDOR HTTP
         // =========================================
 
         ServidorHTTP servidorHTTP =
                 new ServidorHTTP(
-                        8080,
+                        configuracion.PUERTO_HTTP,
                         servicio
                 );
 
@@ -99,6 +88,10 @@ public class App {
         servidorHTTP.iniciar();
 
 
+        // =========================================
+        // INFORMACION DEL SERVIDOR
+        // =========================================
+
         System.out.println();
         System.out.println(
                 "================================="
@@ -113,11 +106,13 @@ public class App {
         );
 
         System.out.println(
-                "TCP  -> puerto 5000"
+                "TCP  -> puerto "
+                + configuracion.PUERTO_TCP
         );
 
         System.out.println(
-                "HTTP -> puerto 8080"
+                "HTTP -> puerto "
+                + configuracion.PUERTO_HTTP
         );
     }
 }
